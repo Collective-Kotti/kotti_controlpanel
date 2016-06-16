@@ -13,7 +13,7 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '0.2.0'
+version = '0.2.1'
 
 install_requires = [
     'Kotti>=1.0.0',
@@ -28,7 +28,6 @@ setup(
     long_description='\n\n'.join([README, CHANGES]),
     classifiers=[
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Framework :: Pylons",
         "Topic :: Internet :: WWW/HTTP",
