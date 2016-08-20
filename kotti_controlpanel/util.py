@@ -6,7 +6,7 @@ from kotti.resources import get_root
 from kotti.views.slots import objectevent_listeners
 from kotti.views.slots import slot_events
 
-from kotti_controlpanel.config import SETTINGS
+from kotti_controlpanel.config import SETTINGS, CONTROL_PANEL_LINKS
 from kotti_controlpanel.resources import ControlPanel
 from kotti_controlpanel.resources import ModuleSettings
 from kotti_controlpanel.resources import SettingObj
@@ -48,7 +48,20 @@ def get_settings():
     return root.annotations['kotti_controlpanel']
 
 
-def add_settings(mod_settings):
+def get_links(controlpanel_id):
+    cpi = slugify(controlpanel_id)
+    return CONTROL_PANEL_LINKS.get(cpi, [])
+
+
+def add_links(controlpanel_id, *links):
+    cpi = slugify(controlpanel_id)
+    clinks = CONTROL_PANEL_LINKS.get(cpi, [])
+    for link in links:
+        clinks.append(link)
+    CONTROL_PANEL_LINKS[cpi] = clinks
+
+
+def add_settings(mod_settings, links=None):
     """Get a dictionary and translate this into an object structure.
     """
     settings = get_settings()
@@ -88,6 +101,8 @@ def add_settings(mod_settings):
                     value = child.default
                 settings[field_name] = value
     mod_slug = slugify(module_settings.name)
+    if type(links) == list:
+        add_links(mod_slug, *links)
     module_settings.slug_id = mod_slug
     SETTINGS[mod_slug] = module_settings
 

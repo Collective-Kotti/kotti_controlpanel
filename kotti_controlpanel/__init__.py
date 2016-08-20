@@ -6,7 +6,7 @@ Created on 2016-06-15
 """
 
 from pyramid.i18n import TranslationStringFactory
-from kotti.util import ViewLink
+from kotti.util import Link
 from kotti.views.site_setup import CONTROL_PANEL_LINKS
 
 _ = TranslationStringFactory('kotti_controlpanel')
@@ -33,7 +33,7 @@ def kotti_configure(settings):
         ' kotti_controlpanel.fanstatic.css_and_js'
     )
 
-    settings = ViewLink('controlpanel', title=_(u'Control Panel'))
+    settings = Link('controlpanel', title=_(u'Control Panel'))
     CONTROL_PANEL_LINKS.append(settings)
 
 def includeme(config):

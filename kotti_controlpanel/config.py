@@ -5,6 +5,7 @@ from kotti_controlpanel import _
 
 # hold the setting objects
 SETTINGS = {}
+CONTROL_PANEL_LINKS = {}
 
 # Here we define some default schemas.
 slot_names = (('left', _(u'left')),

@@ -58,11 +58,13 @@ class BaseSettingViews(BaseView):
         form = view()
         # import pdb; pdb.set_trace()
         form["view"] = view
+        links = util.get_links(setting_id)
         return render_to_response(
             'kotti_controlpanel:templates/settings.pt',
             {
                 "settings": settings,
-                "settings_form": form
+                "settings_form": form,
+                "cp_links": links
             },
             request=self.request)
 
