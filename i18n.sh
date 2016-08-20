@@ -6,9 +6,9 @@
 #         ./i18n.sh
 
 # configuration
-DOMAIN="kotti_site_settings"
-SEARCH_PATH="kotti_site_settings"
-LOCALES_PATH="kotti_site_settings/locale"
+DOMAIN="kotti_controlpanel"
+SEARCH_PATH="kotti_controlpanel"
+LOCALES_PATH="kotti_controlpanel/locale"
 # end configuration
 
 # create locales folder if not exists

@@ -1,2 +1,2 @@
 [run]
-omit = kotti_site_settings/tests/*
+omit = kotti_controlpanel/tests/*

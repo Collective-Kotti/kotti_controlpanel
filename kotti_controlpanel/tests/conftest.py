@@ -12,8 +12,8 @@ from pytest import fixture
 
 @fixture(scope='session')
 def custom_settings():
-    import kotti_site_settings.resources
-    kotti_site_settings.resources  # make pyflakes happy
+    import kotti_controlpanel.resources
+    kotti_controlpanel.resources  # make pyflakes happy
     return {
         'kotti.configurators': 'kotti_tinymce.kotti_configure '
-                               'kotti_site_settings.kotti_configure'}
+                               'kotti_controlpanel.kotti_configure'}

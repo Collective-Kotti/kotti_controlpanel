@@ -12,7 +12,7 @@ from fanstatic import Library
 from fanstatic import Resource
 
 
-library = Library("kotti_site_settings", "static")
+library = Library("kotti_controlpanel", "static")
 
 css = Resource(
     library,

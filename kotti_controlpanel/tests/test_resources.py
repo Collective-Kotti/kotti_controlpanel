@@ -9,7 +9,7 @@ from pytest import raises
 
 
 def test_model(root, db_session):
-    from kotti_site_settings.resources import CustomContent
+    from kotti_controlpanel.resources import CustomContent
 
     cc = CustomContent()
     assert cc.custom_attribute is None

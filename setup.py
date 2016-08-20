@@ -13,7 +13,7 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '0.2.2'
+version = '0.0.1'
 
 install_requires = [
     'Kotti>=1.0.0',
@@ -22,9 +22,9 @@ install_requires = [
 
 
 setup(
-    name='kotti_site_settings',
+    name='kotti_controlpanel',
     version=version,
-    description="Add on for Kotti",
+    description="Settings configuration for Kotti",
     long_description='\n\n'.join([README, CHANGES]),
     classifiers=[
         "Programming Language :: Python",
@@ -35,10 +35,10 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         "License :: Repoze Public License",
     ],
-    author='Kotti developers',
-    author_email='kotti@googlegroups.com',
-    url='https://github.com/b4oshany/kotti_site_settings',
-    keywords='kotti web cms wcms pylons pyramid sqlalchemy bootstrap',
+    author='Oshane Bailey',
+    author_email='b4.oshany@gmail.com',
+    url='https://github.com/b4oshany/kotti_controlpanel',
+    keywords='ui settings controlpanel kotti web cms wcms pylons pyramid sqlalchemy bootstrap',
     license="BSD-derived (http://www.repoze.org/LICENSE.txt)",
     packages=find_packages(),
     include_package_data=True,
@@ -48,10 +48,10 @@ setup(
     dependency_links=[],
     entry_points={
         'fanstatic.libraries': [
-            'kotti_site_settings = kotti_site_settings.fanstatic:library',
+            'kotti_controlpanel = kotti_controlpanel.fanstatic:library',
         ],
     },
-    package_data={"kotti_site_settings": ["templates/*", "static/*",
+    package_data={"kotti_controlpanel": ["templates/*", "static/*",
                                           "locale/*", "views/*",
                                           "alembic/*.*",
                                           "alembic/versions/*"]},

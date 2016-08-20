@@ -11,7 +11,7 @@ from pytest import fixture
 @fixture
 def dummy_content(root):
 
-    from kotti_site_settings.resources import CustomContent
+    from kotti_controlpanel.resources import CustomContent
 
     root['cc'] = cc = CustomContent(
         title=u'My content',
@@ -24,7 +24,7 @@ def dummy_content(root):
 
 def test_view(dummy_content, dummy_request):
 
-    from kotti_site_settings.views.view import CustomContentViews
+    from kotti_controlpanel.views.view import CustomContentViews
 
     views = CustomContentViews(dummy_content, dummy_request)
 

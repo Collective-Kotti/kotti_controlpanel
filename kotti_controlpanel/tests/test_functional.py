@@ -36,7 +36,7 @@ def test_add(webtest, root):
 @mark.user('admin')
 def test_edit(webtest, root):
 
-    from kotti_site_settings.resources import CustomContent
+    from kotti_controlpanel.resources import CustomContent
 
     root['cc'] = CustomContent(title=u'Content Title')
 

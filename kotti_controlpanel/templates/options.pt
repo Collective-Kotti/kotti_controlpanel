@@ -8,7 +8,7 @@
 
   <article metal:fill-slot="content"
            class="content custom-content-default-view"
-           i18n:domain="kotti_site_settings">
+           i18n:domain="kotti_controlpanel">
 
    <h1>System Settings for ${context.title}</h1>
     <form method="post" action="${request.resource_url(context, 'update-settings')}">
