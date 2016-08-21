@@ -56,22 +56,15 @@ class BaseSettingViews(BaseView):
         View = type(str(setting_id), (SettingsFormView,), args)
         view = View(self.context, self.request)
         form = view()
-        # import pdb; pdb.set_trace()
         form["view"] = view
         links = util.get_links(setting_id)
+        template = (settings.template or
+                    'kotti_controlpanel:templates/settings.pt')
         return render_to_response(
-            'kotti_controlpanel:templates/settings.pt',
+            template,
             {
                 "settings": settings,
                 "settings_form": form,
                 "cp_links": links
             },
             request=self.request)
-
-    # @view_config(name='controlpanel',
-    #              custom_predicates=(is_root, ),
-    #              permission='manage',
-    #              request_method = 'POST',
-    #              renderer='kotti_controlpanel:templates/controlpanel.pt')
-    # def post(self):
-    #     setting_id = self.request.params.get("setting_id")

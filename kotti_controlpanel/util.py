@@ -32,7 +32,15 @@ def get_setting(name, default=None, modname=None):
     return default
 
 
-def set_setting(name, val):
+def set_setting(name, val, modname=None):
+    if modname is None and "-" not in name:
+        frame = inspect.stack()[1]
+        module = inspect.getmodule(frame[0])
+        modname = module.__name__
+        if '.' in modname:
+            modname = modname[:modname.find('.')]  # pragma: no cover
+    if modname and not name.startswith(modname):
+        name = '{0}-{1}'.format(modname, name)
     settings = get_settings()
     # It seems not possible to save a set type in a MutableDict,
     # so convert it to a list.

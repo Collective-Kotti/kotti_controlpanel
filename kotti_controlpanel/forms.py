@@ -10,7 +10,7 @@ from pyramid.httpexceptions import HTTPFound
 
 from kotti_controlpanel.events import SettingsAfterSave
 from kotti_controlpanel.events import SettingsBeforeSave
-from kotti_controlpanel.util import get_settings
+from kotti_controlpanel.util import get_settings, get_setting
 from kotti_controlpanel import _
 
 import itertools
@@ -66,11 +66,13 @@ class SettingsFormView(FormView):
             )
             self.schema.children.append(node)
         # the names of the children should begin with the module name
+        settings = get_settings()
         for child in self.schema.children:
             if child.name == 'csrf_token':
                 continue
             if not child.name.startswith(self.settings.module):
                 child.name = "%s-%s" % (self.settings.module, child.name)
+                child.default = settings[child.name]
         # Build up the buttons dynamically, so we can check what setting form
         # was saved.
         save = 'save_' + self.form_id
@@ -84,19 +86,6 @@ class SettingsFormView(FormView):
     def form_id(self):
         form_id = "{0}-{1}".format(self.settings.module, self.name)
         return form_id
-
-    def before(self, form):
-        settings = get_settings()
-        for key in form.cstruct:
-            if key in settings:
-                # Convert boolean to 'true' or 'false' to meet the
-                # requirements of deform's checkbox widget.
-                if isinstance(settings[key], bool):
-                    value = settings[key] and 'true' or 'false'
-                else:
-                    value = settings[key]
-                form.cstruct[key] = value
-        form.formid = self.form_id
 
     def colander_type(self, name):
         # http://docs.pylonsproject.org/projects/colander/en/latest/api.html#types

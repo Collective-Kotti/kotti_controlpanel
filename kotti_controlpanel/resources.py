@@ -60,6 +60,7 @@ class ModuleSettings(object):
         self.settings = []
         self.schema_factory = None
         self.settings_objs = []
+        self.template = None
         self.__dict__.update(kwargs)
 
 
