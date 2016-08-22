@@ -1,6 +1,11 @@
 History
 =======
 
+1.0.1
+------
+
+- Added a page to list all system settings.
+
 
 1.0.0
 ------

@@ -10,7 +10,7 @@ from pyramid.httpexceptions import HTTPFound
 
 from kotti_controlpanel.events import SettingsAfterSave
 from kotti_controlpanel.events import SettingsBeforeSave
-from kotti_controlpanel.util import get_settings, get_setting
+from kotti_controlpanel.util import get_settings, get_setting, set_setting
 from kotti_controlpanel import _
 
 import itertools
@@ -97,8 +97,20 @@ class SettingsFormView(FormView):
             return klass
         raise TypeError("%s is not a class." % name)  # pragma: no cover
 
+    def before(self, form):
+        settings = get_settings()
+        for key in form.cstruct:
+            if key in settings:
+                # Convert boolean to 'true' or 'false' to meet the
+                # requirements of deform's checkbox widget.
+                if isinstance(settings[key], bool):
+                    value = settings[key] and 'true' or 'false'
+                else:
+                    value = settings[key]
+                form.cstruct[key] = value
+        form.formid = self.form_id
+
     def save_success(self, appstruct):
-        from kotti_controlpanel.util import set_setting
         formid = self.request.POST.get('__formid__', None)
         self.active = False
         if formid is not None and formid == self.form_id:

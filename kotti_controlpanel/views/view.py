@@ -15,6 +15,7 @@ from kotti.views.util import is_root
 from kotti_controlpanel.forms import SettingsFormView
 
 from kotti import DBSession
+from kotti.util import Link
 from kotti.views import users as kotti_users
 from kotti_controlpanel import _, util
 from kotti_controlpanel.config import SETTINGS
@@ -24,6 +25,14 @@ from kotti_controlpanel.views import BaseView
 
 
 class BaseSettingViews(BaseView):
+    
+    @view_config(name="controlpanel-dump", permission="admin", root_only=True,
+                 renderer="kotti_controlpanel:templates/controlpanel-dump.pt")
+    def dump_all_settings(self):
+        settings = util.get_settings()
+        return {
+            "all_settings": settings
+        }
 
     @view_config(name='controlpanel',
                  custom_predicates=(is_root, ),
@@ -58,6 +67,15 @@ class BaseSettingViews(BaseView):
         form = view()
         form["view"] = view
         links = util.get_links(setting_id)
+        
+        if self.request.has_permission("admin"):
+            links.append(
+                Link("controlpanel-dump", title=_(u'All Settings'))
+            )
+            links.append(
+                Link('controlpanel', title=_(u'Control Panel'))
+            )
+        
         template = (settings.template or
                     'kotti_controlpanel:templates/settings.pt')
         return render_to_response(
