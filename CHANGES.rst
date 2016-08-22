@@ -1,6 +1,11 @@
 History
 =======
 
+1.0.2
+------
+
+- Fixed duplicate links on controlpanel page.
+
 1.0.1
 ------
 

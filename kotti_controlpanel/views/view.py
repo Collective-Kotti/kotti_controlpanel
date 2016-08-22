@@ -68,13 +68,17 @@ class BaseSettingViews(BaseView):
         form["view"] = view
         links = util.get_links(setting_id)
         
+        link1 = Link('controlpanel', title=_(u'Control Panel'))
+        if link1 not in links:
+            links.append(
+                link1
+            )
         if self.request.has_permission("admin"):
-            links.append(
-                Link("controlpanel-dump", title=_(u'All Settings'))
-            )
-            links.append(
-                Link('controlpanel', title=_(u'Control Panel'))
-            )
+            link2 = Link("controlpanel-dump", title=_(u'All Settings'))
+            if link2 not in links:
+                links.append(
+                    link2
+                )
         
         template = (settings.template or
                     'kotti_controlpanel:templates/settings.pt')
