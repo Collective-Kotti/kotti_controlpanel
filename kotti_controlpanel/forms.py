@@ -26,7 +26,6 @@ class SettingsSchema(colander.MappingSchema):
 class SettingsFormView(FormView):
     """The form template class for one setting tab.
     """
-    form_class = deform.form.Form
     name = 'settings'
     title = _(u"Settings")
     description = u""
@@ -43,6 +42,11 @@ class SettingsFormView(FormView):
         self.context = context
         self.request = request
         self.__dict__.update(kwargs)
+
+    def form_class(self, *args, **kwargs):
+        form = deform.form.Form(*args, **kwargs)
+        form.formid = self.form_id
+        return form
 
     def __call__(self):
         """Build up the schema and return the form view.
@@ -96,19 +100,6 @@ class SettingsFormView(FormView):
         if isinstance(klass, (ClassType, type)):
             return klass
         raise TypeError("%s is not a class." % name)  # pragma: no cover
-
-    def before(self, form):
-        settings = get_settings()
-        for key in form.cstruct:
-            if key in settings:
-                # Convert boolean to 'true' or 'false' to meet the
-                # requirements of deform's checkbox widget.
-                if isinstance(settings[key], bool):
-                    value = settings[key] and 'true' or 'false'
-                else:
-                    value = settings[key]
-                form.cstruct[key] = value
-        form.formid = self.form_id
 
     def save_success(self, appstruct):
         formid = self.request.POST.get('__formid__', None)

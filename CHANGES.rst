@@ -1,6 +1,11 @@
 History
 =======
 
+1.0.3
+------
+
+- Fixed the viewing of package settings.
+
 1.0.2
 ------
 
