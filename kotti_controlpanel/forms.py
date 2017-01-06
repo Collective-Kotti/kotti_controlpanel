@@ -68,15 +68,23 @@ class SettingsFormView(FormView):
                 description=setting_obj.description,
                 default=setting_obj.default
             )
+
             self.schema.children.append(node)
         # the names of the children should begin with the module name
         settings = get_settings()
+        bind_values = self.settings.bind.copy()
         for child in self.schema.children:
+            bind_attrs = bind_values.get(child.name, None)
             if child.name == 'csrf_token':
                 continue
             if not child.name.startswith(self.settings.module):
                 child.name = "%s-%s" % (self.settings.module, child.name)
                 child.default = settings[child.name]
+            if bind_attrs:
+                for k,v in bind_attrs.iteritems():
+                    if callable(v):
+                        v = v()
+                    setattr(child, k, v)
         # Build up the buttons dynamically, so we can check what setting form
         # was saved.
         save = 'save_' + self.form_id

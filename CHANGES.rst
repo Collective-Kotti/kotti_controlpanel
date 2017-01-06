@@ -1,6 +1,11 @@
 History
 =======
 
+1.0.4
+------
+
+- Allowed attributes to be passed into the Schema node for form elements.
+
 1.0.3
 ------
 

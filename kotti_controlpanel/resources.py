@@ -61,6 +61,7 @@ class ModuleSettings(object):
         self.schema_factory = None
         self.settings_objs = []
         self.template = None
+        self.bind = {}
         self.__dict__.update(kwargs)
 
 
@@ -76,6 +77,7 @@ class SettingObj(object):
         self.title = None
         self.description = u''
         self.default = ''
+        self.bind = {}
         self.__dict__.update(kwargs)
 
     @property
