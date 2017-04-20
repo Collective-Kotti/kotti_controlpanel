@@ -17,7 +17,7 @@ from kotti_controlpanel.forms import SettingsFormView
 from kotti import DBSession
 from kotti.util import Link
 from kotti.views import users as kotti_users
-from kotti_controlpanel import _, util
+from kotti_controlpanel import _, util, CONTROL_PANEL_LINKS
 from kotti_controlpanel.config import SETTINGS
 from kotti_controlpanel.resources import ControlPanel
 from kotti_controlpanel.fanstatic import css_and_js
@@ -25,18 +25,19 @@ from kotti_controlpanel.views import BaseView
 
 
 class BaseSettingViews(BaseView):
-    
+
     @view_config(name="controlpanel-dump", permission="admin", root_only=True,
                  renderer="kotti_controlpanel:templates/controlpanel-dump.pt")
     def dump_all_settings(self):
         settings = util.get_settings()
         return {
-            "all_settings": settings
+            "all_settings": settings,
+            "UCP_LINKS": CONTROL_PANEL_LINKS
         }
 
     @view_config(name='controlpanel',
                  custom_predicates=(is_root, ),
-                 permission='manage',
+                 permission='admin',
                 #  request_method = 'GET',
                  renderer='kotti_controlpanel:templates/controlpanel.pt')
     def view(self):
@@ -48,7 +49,8 @@ class BaseSettingViews(BaseView):
                     settings
                 )
             return {
-                "settings": settings_form_views
+                "settings": settings_form_views,
+                "UCP_LINKS": CONTROL_PANEL_LINKS
             }
         settings = SETTINGS.get(setting_id)
         if not settings:
@@ -67,7 +69,7 @@ class BaseSettingViews(BaseView):
         form = view()
         form["view"] = view
         links = util.get_links(setting_id)
-        
+
         link1 = Link('controlpanel', title=_(u'Control Panel'))
         if link1 not in links:
             links.append(
@@ -79,7 +81,7 @@ class BaseSettingViews(BaseView):
                 links.append(
                     link2
                 )
-        
+
         template = (settings.template or
                     'kotti_controlpanel:templates/settings.pt')
         return render_to_response(
@@ -87,6 +89,7 @@ class BaseSettingViews(BaseView):
             {
                 "settings": settings,
                 "settings_form": form,
-                "cp_links": links
+                "cp_links": links,
+                "UCP_LINKS": CONTROL_PANEL_LINKS
             },
             request=self.request)

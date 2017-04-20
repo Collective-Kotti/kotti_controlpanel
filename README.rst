@@ -38,7 +38,7 @@ either settings or schema, schema_factory and use_csrf_token.
 
 Define your settings in a dictionary::
 
-	TestSettings = {
+    TestSettings = {
         'name': 'test_settings',
         'title': "Testsettings",
         'description': "Some description for my settings",
@@ -107,6 +107,16 @@ To get your setting back into your code you use the following::
     from kotti_controlpanel.util import get_setting
 
     first_test_setting = get_setting('test_setting_1')
+
+
+You can also add useful links to the main Control panel view by::
+
+    from kotti.util import Link
+    from kotti_controlpanel import CONTROL_PANEL_LINKS
+
+    def kotti_configure(settings):
+        CONTROL_PANEL_LINKS.append(Link('setup-users', title='User Management'))
+
 
 Events
 ------

@@ -7,10 +7,13 @@ Created on 2016-06-15
 
 from pyramid.i18n import TranslationStringFactory
 from kotti.util import Link
-from kotti.views.site_setup import CONTROL_PANEL_LINKS
+from kotti.views.site_setup import CONTROL_PANEL_LINKS as KOTTI_CP_LINKS
 
 _ = TranslationStringFactory('kotti_controlpanel')
 
+CONTROL_PANEL_LINKS = [
+    Link('setup-users', 'User Management')
+]
 
 def kotti_configure(settings):
     """ Add a line like this to you .ini file::
@@ -26,15 +29,12 @@ def kotti_configure(settings):
 
     settings['pyramid.includes'] += ' kotti_controlpanel'
     settings['kotti.alembic_dirs'] += ' kotti_controlpanel:alembic'
-    # settings['kotti.available_types'] += (
-    #     ' kotti_controlpanel.resources.ControlPanelPage'
-    # )
     settings['kotti.fanstatic.view_needed'] += (
         ' kotti_controlpanel.fanstatic.css_and_js'
     )
 
-    settings = Link('controlpanel', title=_(u'Control Panel'))
-    CONTROL_PANEL_LINKS.append(settings)
+    cp = Link('controlpanel', title=_(u'Control Panel'))
+    KOTTI_CP_LINKS.append(cp)
 
 def includeme(config):
     """ Don't add this to your ``pyramid_includes``, but add the
