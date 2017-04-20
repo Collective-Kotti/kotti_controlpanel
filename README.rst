@@ -41,6 +41,7 @@ Define your settings in a dictionary::
     TestSettings = {
         'name': 'test_settings',
         'title': "Testsettings",
+        'icon': 'myaddon:static/icon.png',
         'description': "Some description for my settings",
         'success_message': u"Successfully saved test settings.",
         'settings': [

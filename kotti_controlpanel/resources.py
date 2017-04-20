@@ -55,6 +55,7 @@ class ModuleSettings(object):
         self.module = None
         self.name = None
         self.title = None
+        self.icon = "kotti_controlpanel:static/gears.png"
         self.description = None
         self.success_message = u''
         self.settings = []
@@ -74,6 +75,7 @@ class SettingObj(object):
         self.module = None
         self.type = 'String'
         self.name = None
+        self.icon = "kotti_controlpanel:static/gears.png"
         self.title = None
         self.description = u''
         self.default = ''
