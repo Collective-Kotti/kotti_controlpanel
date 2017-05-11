@@ -1,6 +1,14 @@
 History
 =======
 
+1.0.5 - 1.0.7
+--------------
+
+- Bug fixes
+- UI Improvements
+- Include Kotti_PDF
+- Change the Folder content type to inherit from Document content type, instead of Content.
+
 1.0.4
 ------
 

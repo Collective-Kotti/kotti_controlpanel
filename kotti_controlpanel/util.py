@@ -18,6 +18,14 @@ def slugify(text, delim=u'-'):
 
 
 def get_setting(name, default=None, modname=None):
+    """ Return the setting for a given module.
+
+    :param name:        Setting Name
+    :param default:     Default value to be return if the setting not found.
+    :param modname:     Name of module it is found in. By default, the function
+                        will use the calling module, i.e. the module that is calling this function.
+    :returns:           Value store in the setting
+    """
     if modname is None:
         frame = inspect.stack()[1]
         module = inspect.getmodule(frame[0])

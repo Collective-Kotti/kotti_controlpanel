@@ -29,12 +29,15 @@ class SettingsFormView(FormView):
     name = 'settings'
     title = _(u"Settings")
     description = u""
-    success_message = _(u"Your changes have been saved.")
+    success_message = _((
+        u"Your changes have been saved. "
+        u"Please reload the application for it to take effect."
+    ))
     success_url = None
     settings = None
     schema_factory = None
     use_csrf_token = True
-    use_ajax = True
+    use_ajax = False
     active = False
     form_options = {'counter': counter}
 
@@ -131,5 +134,5 @@ class SettingsFormView(FormView):
 
     def cancel_success(self, appstruct):
         self.request.session.flash(_(u'No changes made.'), 'info')
-        location = "%s@@settings" % self.request.resource_url(self.context)
+        location = self.request.resource_url(self.context, "controlpanel")
         raise HTTPFound(location=location)

@@ -17,6 +17,7 @@ from kotti_controlpanel.forms import SettingsFormView
 from kotti import DBSession
 from kotti.util import Link
 from kotti.views import users as kotti_users
+from kotti.fanstatic import jquery_form
 from kotti_controlpanel import _, util, CONTROL_PANEL_LINKS
 from kotti_controlpanel.config import SETTINGS
 from kotti_controlpanel.resources import ControlPanel
