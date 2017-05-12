@@ -13,12 +13,12 @@ try:
 except IOError:
     CHANGES = ''
 
-version = '1.0.7'
+version = '1.0.8'
 
 install_requires = [
     'Kotti>=1.0.0',
     'unidecode',
-    'kotti_pdf'
+    'kotti_pdf>=0.4.2'
 ]
 
 
