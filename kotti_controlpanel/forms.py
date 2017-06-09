@@ -82,7 +82,7 @@ class SettingsFormView(FormView):
                 continue
             if not child.name.startswith(self.settings.module):
                 child.name = "%s-%s" % (self.settings.module, child.name)
-                child.default = settings[child.name]
+                child.default = settings.get(child.name)
             if bind_attrs:
                 for k,v in bind_attrs.iteritems():
                     if callable(v):
